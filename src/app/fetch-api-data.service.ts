@@ -13,7 +13,8 @@ const apiUrl = 'https://movie-max-f53b34b56a95.herokuapp.com/';
   // This service is provided at the root level, making it available across the app
   providedIn: 'root',
 })
-export class UserRegistrationService {
+
+export class FetchApiDataService {
   constructor(private http: HttpClient) {}
 
   // User registration
