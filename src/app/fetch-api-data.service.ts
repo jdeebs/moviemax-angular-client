@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
+  HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -16,6 +17,22 @@ const apiUrl = 'https://movie-max-f53b34b56a95.herokuapp.com/';
 
 export class FetchApiDataService {
   constructor(private http: HttpClient) {}
+
+  // Handles client-side and server-side errors
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error (e.g., network issue, browser-related error)
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // Server-side error (e.g., API returned a failure response)
+      console.error(
+        `Backend returned code ${error.status}, body was: ${error.error}`
+      );
+    }
+    // Return an observable that emits an error message
+    // throwError expects a function to return the error
+    return throwError(() => new Error('Something went wrong; please try again later.'));
+  }
 
   // User registration
   public userRegistration(userData: any): Observable<any> {
@@ -115,21 +132,5 @@ export class FetchApiDataService {
       .delete(apiUrl + 'users/' + username + '/movies/' + movieId)
       .pipe(catchError(this.handleError))
     )
-  }
-
-  // Handles client-side and server-side errors
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error (e.g., network issue, browser-related error)
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // Server-side error (e.g., API returned a failure response)
-      console.error(
-        `Backend returned code ${error.status}, body was: ${error.error}`
-      );
-    }
-    // Return an observable that emits an error message
-    // throwError expects a function to return the error
-    return throwError(() => new Error('Something went wrong; please try again later.'));
   }
 }
