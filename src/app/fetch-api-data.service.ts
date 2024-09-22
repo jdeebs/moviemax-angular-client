@@ -18,19 +18,19 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) {}
 
   // User registration
-  public userRegistration(userDetails: any): Observable<any> {
+  public userRegistration(userData: any): Observable<any> {
     return (
       this.http
-        .post(apiUrl + 'users', userDetails)
+        .post(apiUrl + 'users', userData)
         .pipe(catchError(this.handleError))
     );
   }
 
   // User login
-  public userLogin(userDetails: any) {
+  public userLogin(userData: any) {
     return (
       this.http
-      .post(apiUrl + 'login', userDetails)
+      .post(apiUrl + 'login', userData)
       .pipe(catchError(this.handleError))
     )
   }
@@ -91,10 +91,10 @@ export class FetchApiDataService {
   }
 
   // Update user info
-  public updateUser(username: string, userDetails: any) {
+  public updateUser(username: string, userData: any) {
     return (
       this.http
-      .put(apiUrl + 'users/' + username, userDetails)
+      .put(apiUrl + 'users/' + username, userData)
       .pipe(catchError(this.handleError))
     )
   }
