@@ -1,6 +1,6 @@
 // Core Angular Modules
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 // Angular Material Modules
 import { MatDialogRef } from '@angular/material/dialog';
@@ -16,7 +16,6 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '' };
-  router: any;
 
   constructor(
     // Access API methods
@@ -24,7 +23,9 @@ export class UserLoginFormComponent implements OnInit {
     // Control the dialog(modal) that opens the form
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     // Show feedback notifications to user
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    // Define router to allow navigation back to welcome page
+    public router: Router
   ) {}
 
   // Lifecycle method called when component is initialized. Empty since login logic is handled in loginUser()
@@ -43,6 +44,7 @@ export class UserLoginFormComponent implements OnInit {
         this.snackBar.open('Login successful!', 'OK', {
           duration: 2000,
         });
+        // Navigate to movie route after login
         this.router.navigate(['movies']);
       },
       (response: any) => {
