@@ -1,6 +1,6 @@
 /**
  * This service handles all HTTP requests to the MovieMax API, such as user registration, login, fetching movie data, updating user information, and managing favorite movies.
- * 
+ *
  * It includes methods for making GET, POST, PUT, and DELETE requests to various API endpoints.
  * Each API call includes the necessary bearer token for authentication in the request headers.
  */
@@ -82,59 +82,72 @@ export class FetchApiDataService {
   }
 
   // Get a single movie
-  public getSingleMovie(title: string) {
+  public getSingleMovie(title: string): Observable<any> {
     return this.http
-      .get(apiUrl + 'movies/' + title)
+      .get(apiUrl + 'movies/' + title, { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   // Get director
-  public getDirector(directorName: string) {
+  public getDirector(directorName: string): Observable<any> {
     return this.http
-      .get(apiUrl + 'movies/director/' + directorName)
+      .get(apiUrl + 'movies/director/' + directorName, {
+        headers: this.setHeaders(),
+      })
       .pipe(catchError(this.handleError));
   }
 
   // Get genre
-  public getGenre(genreName: string) {
+  public getGenre(genreName: string): Observable<any> {
     return this.http
-      .get(apiUrl + 'movies/genre/' + genreName)
+      .get(apiUrl + 'movies/genre/' + genreName, { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   // Get user data
   // Includes id, username, pass, email, birthday, fav movies
-  public getUserData(username: string) {
+  public getUserData(username: string): Observable<any> {
     return this.http
-      .get(apiUrl + 'users/' + username)
+      .get(apiUrl + 'users/' + username, { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   // Add movie to favorites
-  public addFavoriteMovie(username: string, movieId: string) {
+  public addFavoriteMovie(username: string, movieId: string): Observable<any> {
     return this.http
-      .post(apiUrl + 'users/' + username + '/movies/' + movieId, {}) // Empty object as body since we don't need to send any data
-      .pipe(catchError(this.handleError));
-  }
-
-  // Update user info
-  public updateUser(username: string, userData: any) {
-    return this.http
-      .put(apiUrl + 'users/' + username, userData)
-      .pipe(catchError(this.handleError));
-  }
-
-  // Delete user
-  public deleteUser(username: string) {
-    return this.http
-      .delete(apiUrl + 'users/' + username)
+      .post(
+        apiUrl + 'users/' + username + '/movies/' + movieId,
+        {},
+        { headers: this.setHeaders() }
+      ) // Empty object as body since we don't need to send any data
       .pipe(catchError(this.handleError));
   }
 
   // Delete movie from favorites
-  public deleteFavoriteMovie(username: string, movieId: string) {
+  public deleteFavoriteMovie(
+    username: string,
+    movieId: string
+  ): Observable<any> {
     return this.http
-      .delete(apiUrl + 'users/' + username + '/movies/' + movieId)
+      .delete(apiUrl + 'users/' + username + '/movies/' + movieId, {
+        headers: this.setHeaders(),
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Update user info
+  public updateUser(username: string, userData: any): Observable<any> {
+    return this.http
+      .put(apiUrl + 'users/' + username, userData, {
+        headers: this.setHeaders(),
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Delete user
+  public deleteUser(username: string): Observable<any> {
+    return this.http
+      .delete(apiUrl + 'users/' + username, { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 }
