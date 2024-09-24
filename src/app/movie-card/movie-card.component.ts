@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MovieInfoDialogComponent } from '../movie-info-dialog/movie-info-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -10,7 +14,11 @@ export class MovieCardComponent implements OnInit {
   // Store returned movie data
   movies: any[] = [];
   // Public keyword makes fetchApiData accessible from outside of the class
-  constructor(public fetchApiData: FetchApiDataService) {}
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public router: Router,
+    public dialog: MatDialog
+  ) {}
 
   // Lifecycle hook called when component is initialized
   // Call getMovies() when component initializes
