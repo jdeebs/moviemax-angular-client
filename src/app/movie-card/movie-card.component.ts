@@ -34,4 +34,24 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     });
   }
+
+  showGenre(movie: any): void {
+    this.dialog.open(MovieInfoDialogComponent, {
+      data: {
+        title: String(movie.Genre.Name).toUpperCase(),
+        content: movie.Genre.Description
+      },
+      width: "500px"
+    })
+  }
+
+  showDirector(movie: any): void {
+    this.dialog.open(MovieInfoDialogComponent, {
+      data: {
+        title: movie.Director.Name,
+        content: `Born ${movie.Director.Birth}, ${movie.Director.Bio}`
+      },
+      width: "500px"
+    })
+  }
 }

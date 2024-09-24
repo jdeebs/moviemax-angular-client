@@ -1,15 +1,11 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title class="movie-info-dialog-title">{{data.Title}}</mat-card-title>
+        <mat-card-title class="movie-info-dialog-title">{{data.title}}</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="movie-info-dialog-content">{{data.Content}}</mat-card-content>
+    <mat-card-content class="movie-info-dialog-content">{{data.content}}</mat-card-content>
     <mat-card-actions>
-        <button
-        mat-raised-button
-        (click)="closeMovieInfoDialog()"
-        color="secondary"
-        >
-        Close
+        <button mat-raised-button (click)="closeMovieInfoDialog()" color="accent">
+            Close
         </button>
     </mat-card-actions>
 </mat-card>

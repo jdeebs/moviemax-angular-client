@@ -12,8 +12,8 @@ export class MovieInfoDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     // Data passed to dialog when opened
     public data: {
-      Title: string;
-      Content: string;
+      title: string;
+      content: string;
     },
     // Allow control to close the dialog
     public dialogRef: MatDialogRef<MovieInfoDialogComponent>

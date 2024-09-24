@@ -8,10 +8,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'moviemax-angular-client';
-  // // Open the dialog when movie card is clicked
-  // openMoviesDialog(): void {
-  //   this.dialog.open(MovieCardComponent, {
-  //     width: '500px',
-  //   });
-  // }
 }
