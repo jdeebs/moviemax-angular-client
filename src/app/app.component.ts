@@ -1,8 +1,12 @@
+// Angular Core & Material Design Imports
 import { Component } from '@angular/core';
-import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
-import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+
+// Component Imports
+import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
+import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +29,12 @@ export class AppComponent {
     this.dialog.open(UserLoginFormComponent, {
       // Dialog width
       width: '280px',
+    });
+  }
+  // Open the dialog when movie card is clicked
+  openMoviesDialog(): void {
+    this.dialog.open(MovieCardComponent, {
+      width: '500px',
     });
   }
 }

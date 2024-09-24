@@ -6,9 +6,10 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss'],
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   // Store returned movie data
   movies: any[] = [];
+  // Public keyword makes fetchApiData accessible from outside of the class
   constructor(public fetchApiData: FetchApiDataService) {}
 
   // Lifecycle hook called when component is initialized
