@@ -23,6 +23,14 @@ export class FetchApiDataService {
     return userToken ? userToken : '';
   }
 
+  // Set header to include bearer token for API access
+  private setHeaders(): HttpHeaders {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return headers;
+  }
+
   // Handles client-side and server-side errors
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
@@ -58,11 +66,7 @@ export class FetchApiDataService {
   // Get all movies
   public getAllMovies(): Observable<any> {
     return this.http
-      .get(apiUrl + 'movies', {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${this.getToken()}`,
-        }),
-      })
+      .get(apiUrl + 'movies', { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
