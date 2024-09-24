@@ -1,3 +1,10 @@
+/**
+ * This service handles all HTTP requests to the MovieMax API, such as user registration, login, fetching movie data, updating user information, and managing favorite movies.
+ * 
+ * It includes methods for making GET, POST, PUT, and DELETE requests to various API endpoints.
+ * Each API call includes the necessary bearer token for authentication in the request headers.
+ */
+
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
@@ -17,7 +24,9 @@ const apiUrl = 'https://movie-max-f53b34b56a95.herokuapp.com/';
 export class FetchApiDataService {
   constructor(private http: HttpClient) {}
 
-  // Gets token from local storage
+  // Helper methods
+
+  // Get token from local storage
   private getToken(): string {
     const userToken = localStorage.getItem('token');
     return userToken ? userToken : '';
@@ -48,6 +57,8 @@ export class FetchApiDataService {
       () => new Error('Something went wrong; please try again later.')
     );
   }
+
+  // API request methods
 
   // User registration
   public userRegistration(userData: any): Observable<any> {
