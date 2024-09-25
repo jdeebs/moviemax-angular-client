@@ -21,4 +21,8 @@ export class ToolbarComponent implements OnInit {
       localStorage.removeItem('user');
     }
   }
+
+  openProfile(): void {
+    this.router.navigate(['profile'])
+  }
 }

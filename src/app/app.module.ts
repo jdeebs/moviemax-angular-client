@@ -29,11 +29,13 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MovieInfoDialogComponent } from './movie-info-dialog/movie-info-dialog.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 // Define routes
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     MovieInfoDialogComponent,
     ToolbarComponent,
+    UserProfileComponent,
   ],
   imports: [
     // Core Angular Modules
