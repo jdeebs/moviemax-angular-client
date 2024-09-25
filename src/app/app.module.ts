@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from "@angular/material/icon";
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 // Forms Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +28,7 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MovieInfoDialogComponent } from './movie-info-dialog/movie-info-dialog.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 // Define routes
 const appRoutes: Routes = [
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
     MovieCardComponent,
     WelcomePageComponent,
     MovieInfoDialogComponent,
+    ToolbarComponent,
   ],
   imports: [
     // Core Angular Modules
@@ -63,6 +66,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
     MatIconModule,
+    MatToolbarModule,
 
     // Forms Modules
     FormsModule,
