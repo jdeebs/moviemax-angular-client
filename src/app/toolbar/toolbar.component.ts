@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FetchApiDataService } from '../fetch-api-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  styleUrls: ['./toolbar.component.scss'],
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public router: Router
+  ) {}
 
+  ngOnInit(): void {}
+
+  logout(): void {
+    if (window.confirm("Are you sure you want to logout?")) {
+      this.router.navigate(['welcome']);
+      localStorage.removeItem('user');
+    }
+  }
 }
