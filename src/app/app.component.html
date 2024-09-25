@@ -1,2 +1,3 @@
-<app-toolbar></app-toolbar>
+<!-- Only show toolbar if the route is not '/welcome' -->
+<app-toolbar *ngIf="showToolbar()"></app-toolbar>
 <router-outlet></router-outlet>
