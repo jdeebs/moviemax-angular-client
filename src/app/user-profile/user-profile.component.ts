@@ -27,13 +27,28 @@ export class UserProfileComponent implements OnInit {
       .getUserData(this.userData.Username)
       .subscribe((response: any) => {
         this.userData = {
-          ...response.user,
-          id: response.user._id,
+          ...response,
+          id: response._id,
           password: this.userData.Password,
-          token: response.token,
+        };
+        console.log(this.userData);
+        localStorage.setItem('user', JSON.stringify(this.userData));
+      });
+  }
+
+  updateUser(): void {
+    this.fetchApiData.updateUser(this.userData.Username, this.userData).subscribe(
+      (response: any) => {
+        this.userData = {
+          ...response,
+          id: response._id,
+          password: this.userData.Password,
         };
         localStorage.setItem('user', JSON.stringify(this.userData));
-        localStorage.setItem('token', response.token);
-      });
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 }
