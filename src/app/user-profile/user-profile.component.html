@@ -3,6 +3,18 @@
         Back
     </button>
     <h1>
-        Profile Page
+        User Info
     </h1>
+    <mat-card>
+        <mat-card-title>Username:</mat-card-title>
+        <mat-card-content>{{userData.Username}} </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>Email:</mat-card-title>
+        <mat-card-content>{{userData.Email}} </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>Birthday:</mat-card-title>
+        <mat-card-content>{{userData.Birthday | date:'MM/dd/yyyy'}} </mat-card-content>
+    </mat-card>
 </div>
