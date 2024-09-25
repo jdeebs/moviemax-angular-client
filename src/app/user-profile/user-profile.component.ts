@@ -18,6 +18,10 @@ export class UserProfileComponent implements OnInit {
     this.getUser();
   }
 
+  openMovies(): void {
+    this.router.navigate(['movies']);
+  }
+
   getUser(): void {
     this.fetchApiData
       .getUserData(this.userData.Username)
