@@ -38,7 +38,7 @@ export class UserLoginFormComponent implements OnInit {
         this.dialogRef.close(); // Close dialog on success
         console.log(response);
         this.snackBar.open('Login successful!', 'OK', {
-          duration: 2000,
+          duration: 4000,
         });
         // Save user and token in local storage
         let user = {
@@ -56,7 +56,7 @@ export class UserLoginFormComponent implements OnInit {
         // Unsuccessful login
         console.log(response);
         this.snackBar.open('Login failed!', 'OK', {
-          duration: 2000,
+          duration: 4000,
         });
       }
     );
