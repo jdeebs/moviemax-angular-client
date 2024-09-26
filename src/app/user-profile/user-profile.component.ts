@@ -25,7 +25,12 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = JSON.parse(localStorage.getItem('user') || '');
     if (storedUser) {
-      this.userData = storedUser;
+      this.userData = {
+        Username: storedUser.Username,
+        Password: '', // Clear password field
+        Email: storedUser.Email,
+        Birthday: storedUser.Birthday,
+      };
       // Fetch latest data from API
       this.getUser();
     }
@@ -41,7 +46,7 @@ export class UserProfileComponent implements OnInit {
         this.userData = {
           ...response,
           id: response._id,
-          password: '',
+          Password: '', // Clear password for security
         };
         console.log(this.userData);
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -64,7 +69,7 @@ export class UserProfileComponent implements OnInit {
             this.userData = {
               ...response,
               id: response._id,
-              password: '', // Clear password after update for security
+              Password: '', // Clear password after update for security
             };
             localStorage.setItem('user', JSON.stringify(this.userData));
 
