@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MovieInfoDialogComponent } from '../movie-info-dialog/movie-info-dialog.component';
@@ -17,7 +18,8 @@ export class MovieCardComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {}
 
   // Lifecycle hook called when component is initialized
@@ -91,7 +93,10 @@ export class MovieCardComponent implements OnInit {
           // Change favorite icon to hollow
           icon?.setAttribute('fontIcon', 'favorite_border');
 
-          console.log('Removed movie from favorites.');
+          // Display alert confirming removal
+          this.snackBar.open('Removed movie from favorites.', 'OK', {
+            duration: 4000,
+          });
 
           // Update user with new favorite list
           user.FavoriteMovies = response.FavoriteMovies;
@@ -109,7 +114,10 @@ export class MovieCardComponent implements OnInit {
           // Change favorite icon to filled
           icon?.setAttribute('fontIcon', 'favorite');
 
-          console.log('Added movie to favorites.');
+          // Display alert confirming add
+          this.snackBar.open('Added movie to favorites.', 'OK', {
+            duration: 4000,
+          });
 
           // Update user with new favorite list
           user.FavoriteMovies = response.FavoriteMovies;
