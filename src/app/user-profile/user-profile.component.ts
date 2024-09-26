@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -29,7 +30,7 @@ export class UserProfileComponent implements OnInit {
         this.userData = {
           ...response,
           id: response._id,
-          password: this.userData.Password,
+          password: '',
         };
         console.log(this.userData);
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -45,6 +46,7 @@ export class UserProfileComponent implements OnInit {
           password: this.userData.Password,
         };
         localStorage.setItem('user', JSON.stringify(this.userData));
+        console.log("Update successful");
       },
       (error: any) => {
         console.error(error);

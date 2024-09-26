@@ -17,4 +17,84 @@
         <mat-card-title>Birthday:</mat-card-title>
         <mat-card-content>{{userData.Birthday | date:'MM/dd/yyyy'}} </mat-card-content>
     </mat-card>
+
+    <h1>
+        Edit Profile
+    </h1>
+    <mat-card-content>
+        <form #profileForm="ngForm" (ngSubmit)="updateUser()" novalidate>
+            <mat-form-field style="margin-right: 10px;">
+              <label>Username</label>
+              <input
+                matInput
+                [(ngModel)]="userData.username"
+                placeholder="{{userData.Username}}"
+                type="text"
+                name="username"
+                required
+                minlength="3"
+                #username="ngModel"
+              >
+              <mat-error *ngIf="username.invalid && (username.dirty || username.touched)">
+                <span *ngIf="username.errors?.['required']">Username is required.</span>
+                <span *ngIf="username.errors?.['minlength']">Username must be at least 3 characters long.</span>
+              </mat-error>
+            </mat-form-field>
+          
+            <mat-form-field style="margin-right: 10px;">
+              <label>Password</label>
+              <input
+                matInput
+                [(ngModel)]="userData.password"
+                #passwordInput="ngModel"
+                type="password"
+                placeholder="New Password"
+                name="password"
+                required
+                minlength="8"
+                #password="ngModel"
+              >
+              <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+                <span *ngIf="password.errors?.['required']">Password is required.</span>
+                <span *ngIf="password.errors?.['minlength']">Password must be at least 8 characters long.</span>
+              </mat-error>
+            </mat-form-field>
+          
+            <mat-form-field style="margin-right: 10px;">
+              <label>Email</label>
+              <input
+                matInput
+                [(ngModel)]="userData.email"
+                type="email"
+                placeholder="{{userData.Email}}"
+                name="email"
+                required
+                #email="ngModel"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              >
+              <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                <span *ngIf="email.errors?.['required']">Email is required.</span>
+                <span *ngIf="email.errors?.['pattern']">Enter a valid email address.</span>
+              </mat-error>
+            </mat-form-field>
+          
+            <mat-form-field style="margin-right: 10px;">
+              <label>Birthday</label>
+              <input
+                matInput
+                [(ngModel)]="userData.birthday"
+                type="date"
+                name="birthday"
+              >
+            </mat-form-field>
+          
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="profileForm.invalid"
+            >
+              Update
+            </button>
+          </form>   
+    </mat-card-content>       
 </div>
