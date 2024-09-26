@@ -3,12 +3,12 @@
 // Include the common styles for Angular Material.
 @include mat.core();
 
-// Define the custom color palettes
+// Define primary, accent, and warn palettes
 $custom-primary: mat.define-palette(mat.$blue-grey-palette);
 $custom-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 $custom-warn: mat.define-palette(mat.$red-palette);
 
-// Create a light theme with the blue-grey primary palette.
+// Theme
 $custom-theme: mat.define-light-theme(
   (
     color: (
@@ -17,15 +17,21 @@ $custom-theme: mat.define-light-theme(
       warn: $custom-warn,
     ),
     typography: mat.define-typography-config(),
-    // Optional: customize typography
-    density: 0 // Optional: set density for padding and margins,,
+    // Optional: Set density to 0 for comfortable, 1 for cozy, and 2 for compact
+    density: 0 
   )
 );
 
 // Apply the theme
 @include mat.all-component-themes($custom-theme);
 
-// Global styles
+// Global styles/variables
+
+// Spacing variables
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+
 html,
 body {
   height: 100%;
