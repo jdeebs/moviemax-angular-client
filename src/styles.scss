@@ -27,10 +27,17 @@ $custom-theme: mat.define-light-theme(
 
 // Global styles/variables
 
-// Spacing variables
+// Define global spacing variables
 $spacing-sm: 8px;
 $spacing-md: 16px;
 $spacing-lg: 24px;
+
+// Define global font size variables
+$font-size-sm: 14px;  // Small devices
+$font-size-md: 16px;  // Medium devices
+$font-size-lg: 24px;  // Large devices
+$font-size-xl: 32px;  // Extra large devices
+$font-size-xxl: 48px; // Extra extra large devices
 
 html,
 body {

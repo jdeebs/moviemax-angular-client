@@ -1,3 +1,5 @@
+@import 'src/styles.scss';
+
 .main-page {
     display: flex;
     flex-direction: column;
@@ -5,35 +7,38 @@
     align-items: center;
     height: 100vh;
     text-align: center;
-    padding: 20px;
+    padding: $spacing-lg;
 }
 
 .title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-md;
 
-    @media (min-width: 600px) {
-        font-size: 32px;
-    }
+    @media (max-width: 599px) {
+        font-size: $font-size-lg;  // Small devices
+      }
+      
+      @media (min-width: 600px) and (max-width: 959px) {
+        font-size: $font-size-xl;  // Medium devices
+      }
     
-    @media (min-width: 960px) {
-        font-size: 48px;
+      @media (min-width: 960px) {
+        font-size: $font-size-xxl;  // Large devices
+      }
     }
-}
 
 .button-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: $spacing-lg;
 
     button {
-        width: 100%;
+        width: auto;
         max-width: 280px;
     }
 
     @media (min-width: 600px) {
         flex-direction: row;
-        gap: 20px;
         justify-content: center;
 
         button {
