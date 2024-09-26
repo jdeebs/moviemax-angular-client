@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,11 +9,17 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  userData: any = {};
+  @Input() userData: {
+    Username: string;
+    Password: string;
+    Email: string;
+    Birthday: string;
+  } = { Username: '', Password: '', Email: '', Birthday: '' };
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public router: Router
+    public router: Router,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -62,11 +68,19 @@ export class UserProfileComponent implements OnInit {
             };
             localStorage.setItem('user', JSON.stringify(this.userData));
 
+            // Display alert for successful update
+            this.snackBar.open('Update successful!', 'OK', {
+              duration: 4000,
+            });
             // Fetch latest user info to reflect changes in the view
             this.getUser();
           },
           (error: any) => {
             console.error('Error updating user: ', error);
+            // Display alert for failed update
+            this.snackBar.open('Update Failed!', 'OK', {
+              duration: 4000,
+            });
           }
         );
     }

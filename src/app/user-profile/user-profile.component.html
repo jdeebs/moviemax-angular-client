@@ -27,10 +27,10 @@
               <label>Username</label>
               <input
                 matInput
-                [(ngModel)]="userData.username"
+                [(ngModel)]="userData.Username"
                 placeholder="{{userData.Username}}"
                 type="text"
-                name="username"
+                name="Username"
                 required
                 minlength="3"
                 #username="ngModel"
@@ -45,11 +45,11 @@
               <label>Password</label>
               <input
                 matInput
-                [(ngModel)]="userData.password"
+                [(ngModel)]="userData.Password"
                 #passwordInput="ngModel"
                 type="password"
                 placeholder="New Password"
-                name="password"
+                name="Password"
                 required
                 minlength="8"
                 #password="ngModel"
@@ -64,10 +64,10 @@
               <label>Email</label>
               <input
                 matInput
-                [(ngModel)]="userData.email"
+                [(ngModel)]="userData.Email"
                 type="email"
                 placeholder="{{userData.Email}}"
-                name="email"
+                name="Email"
                 required
                 #email="ngModel"
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
@@ -82,9 +82,9 @@
               <label>Birthday</label>
               <input
                 matInput
-                [(ngModel)]="userData.birthday"
+                [(ngModel)]="userData.Birthday"
                 type="date"
-                name="birthday"
+                name="Birthday"
               >
             </mat-form-field>
           

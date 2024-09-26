@@ -45,9 +45,9 @@ export class UserLoginFormComponent implements OnInit {
           ...response.user,
           id: response.user._id,
           password: this.userData.Password,
-          token: response.token
-        }
-        localStorage.setItem("user", JSON.stringify(user));
+          token: response.token,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', response.token);
         // Navigate to movie route after login
         this.router.navigate(['movies']);
