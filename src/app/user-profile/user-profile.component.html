@@ -1,24 +1,23 @@
 <div class="profile-page">
-    <button mat-raised-button (click)="openMovies()" color="primary">
-        Back
-    </button>
-    <h1>
-        User Info
-    </h1>
-    <mat-card>
-        <mat-card-title>Username:</mat-card-title>
-        <mat-card-content>{{userData.Username}} </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-title>Email:</mat-card-title>
-        <mat-card-content>{{userData.Email}} </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-title>Birthday:</mat-card-title>
-        <mat-card-content>{{userData.Birthday | date:'MM/dd/yyyy'}} </mat-card-content>
-    </mat-card>
+  <h1 class="title">
+    User Info
+</h1>
+  <div class="user-info-container">
+  <mat-card class="user-info-card">
+      <mat-card-title>Username:</mat-card-title>
+      <mat-card-content>{{userData.Username}} </mat-card-content>
+  </mat-card>
+  <mat-card class="user-info-card">
+      <mat-card-title>Email:</mat-card-title>
+      <mat-card-content>{{userData.Email}} </mat-card-content>
+  </mat-card>
+  <mat-card class="user-info-card">
+      <mat-card-title>Birthday:</mat-card-title>
+      <mat-card-content>{{userData.Birthday | date:'MM/dd/yyyy'}} </mat-card-content>
+  </mat-card>
+  </div>
 
-    <h1>
+    <!-- <h1 class="title">
         Edit Profile
     </h1>
     <mat-card-content>
@@ -96,5 +95,5 @@
               Update
             </button>
           </form>   
-    </mat-card-content>       
+    </mat-card-content>        -->
 </div>

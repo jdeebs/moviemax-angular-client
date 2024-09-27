@@ -25,4 +25,8 @@ export class ToolbarComponent implements OnInit {
   openProfile(): void {
     this.router.navigate(['profile'])
   }
+
+  openMovies(): void {
+    this.router.navigate(['movies']);
+  }
 }

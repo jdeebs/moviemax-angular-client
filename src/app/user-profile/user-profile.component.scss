@@ -1,0 +1,33 @@
+@import 'src/styles.scss';
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+}
+
+.user-info-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-md;
+    margin: $spacing-md;
+}
+
+.user-info-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: $spacing-sm;
+    padding: $spacing-sm;
+    overflow: hidden;
+    border-radius: 0px 25px 0 0;
+    // Raised shadow effect
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(96, 125, 139, 0.2);
+}
