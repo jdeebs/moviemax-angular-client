@@ -19,7 +19,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -39,17 +39,13 @@ export class UserProfileComponent implements OnInit {
   getUser(): void {
     this.fetchApiData.getUserData(this.userData.Username).subscribe(
       (response: any) => {
-        this.userData = {
-          ...response,
-          id: response._id,
-          Password: '', // Clear password for security
-        };
-        console.log(this.userData);
-        localStorage.setItem('user', JSON.stringify(this.userData));
+        // Destructure password from user object to exclude it from response
+        const { Password, ...userData } = response;
+        this.userData = userData;
       },
       (error: any) => {
         console.error('Error fetching user data:', error);
-      }
+      },
     );
   }
 
@@ -61,13 +57,14 @@ export class UserProfileComponent implements OnInit {
         .updateUser(this.userData.Username, this.userData)
         .subscribe(
           (response: any) => {
+            // Exclude password from response before saving to local storage
+            const { Password, ...updatedUserData } = response;
+
             // Save the updated user info to local storage
-            this.userData = {
-              ...response,
-              id: response._id,
-              Password: '', // Clear password after update for security
-            };
-            localStorage.setItem('user', JSON.stringify(this.userData));
+            localStorage.setItem('user', JSON.stringify(updatedUserData));
+            
+            // Update userData without Password field
+            this.userData = { ...updatedUserData };
 
             // Display alert for successful update
             this.snackBar.open('Update successful!', 'OK', {
@@ -82,7 +79,7 @@ export class UserProfileComponent implements OnInit {
             this.snackBar.open('Update Failed!', 'OK', {
               duration: 4000,
             });
-          }
+          },
         );
     }
   }
