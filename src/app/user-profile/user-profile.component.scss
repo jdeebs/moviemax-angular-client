@@ -1,33 +1,81 @@
-@import 'src/styles.scss';
+@import "src/styles.scss";
 
 .profile-page {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
 }
 
 .user-info-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: $spacing-md;
-    margin: $spacing-md;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-md;
+  margin: $spacing-md;
 }
 
 .user-info-card {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-    margin: $spacing-sm;
-    padding: $spacing-sm;
-    overflow: hidden;
-    border-radius: 0px 25px 0 0;
-    // Raised shadow effect
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: rgba(96, 125, 139, 0.2);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  margin: $spacing-sm;
+  padding: $spacing-sm;
+  overflow: hidden;
+  border-radius: 0px 25px 0 0;
+  // Raised shadow effect
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(96, 125, 139, 0.2);
+}
+
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: $spacing-md;
+  flex-wrap: wrap;
+}
+
+.edit-profile-card {
+  display: flex;
+  width: 100%;
+  max-width: 300px;
+  margin: $spacing-md;
+  padding: $spacing-sm;
+  padding-bottom: $spacing-lg;
+  overflow: hidden;
+  border-radius: 0px 25px 0 0;
+  // Raised shadow effect
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(96, 125, 139, 0.2);
+}
+
+// Use ng-deep to overwrite Angular's ViewEncapsulation
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--mdc-filled-text-field-container-color);
+  border-radius: 0 20px 0 0;
+}
+
+.mat-mdc-card-content > :last-child:not(.mat-mdc-card-footer) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+form {
+  position: relative;
+}
+
+button {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  align-self: center;
 }
