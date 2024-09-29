@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row class="toolbar-row">
         <span>MovieMax</span>
-        <div>
+
+        <!-- Buttons for larger screens -->
+        <div class="toolbar-buttons" fxHide fxShow.gt-sm>
             <button mat-flat-button (click)="openMovies()" color="primary" class="toolbar-right">
                 Home
             </button>
@@ -12,5 +14,24 @@
                 Logout
             </button>
         </div>
+
+         <!-- Hamburger menu for smaller screens -->
+    <div class="hamburger-menu" fxShow fxHide.gt-sm>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openMovies()">
+          Home
+        </button>
+        <button mat-menu-item (click)="openProfile()">
+          Profile
+        </button>
+        <button mat-menu-item (click)="logout()">
+          Logout
+        </button>
+      </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

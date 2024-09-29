@@ -1,8 +1,23 @@
 .toolbar-row {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.toolbar-right {
-    margin-left: 16px;
+.toolbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.hamburger-menu {
+  display: none; /* Hide hamburger by default */
+}
+
+@media (max-width: 768px) {
+  .toolbar-buttons {
+    display: none; /* Hide buttons on small screens */
+  }
+  .hamburger-menu {
+    display: flex; /* Show hamburger menu on small screens */
+  }
 }
