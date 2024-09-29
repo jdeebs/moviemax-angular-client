@@ -56,9 +56,16 @@
         <label>Birthday</label>
         <input matInput [(ngModel)]="userData.Birthday" type="date" name="Birthday">
       </mat-form-field>
+      <div class="button-container">
       <button mat-raised-button color="primary" [disabled]="profileForm.invalid">
         Update
       </button>
+    </div>
     </form>
+    <div class="button-container">
+      <button mat-raised-button color="warn" (click)="deleteUser()">
+        Delete Account
+      </button>
+    </div>
   </mat-card-content>
 </div>

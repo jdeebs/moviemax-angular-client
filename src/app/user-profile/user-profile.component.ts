@@ -27,6 +27,11 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const storedUser = JSON.parse(localStorage.getItem('user') || '');
+    const token = localStorage.getItem('token') || '';
+    if (!token) {
+      // Navigate to welcome page
+      this.router.navigate(['/welcome']);
+    }
     if (storedUser) {
       // Store old username
       this.oldUsername = storedUser.Username;
@@ -83,6 +88,36 @@ export class UserProfileComponent implements OnInit {
           console.error('Error updating user: ', error);
           // Display alert for failed update
           this.snackBar.open('Update Failed!', 'OK', {
+            duration: 4000,
+          });
+        },
+      );
+    }
+  }
+
+  deleteUser(): void {
+    if (
+      window.confirm(
+        'Are you sure you want to delete your account? This cannot be undone.',
+      )
+    ) {
+      this.fetchApiData.deleteUser(this.oldUsername).subscribe(
+        (response: any) => {
+          console.log(response);
+          // Display alert for successful account deletion
+          this.snackBar.open('Account Successfully Obliterated.', '💀', {
+            duration: 4000,
+          });
+          // Delete user and token from local storage
+          localStorage.removeItem('user');
+          localStorage.removeItem('token');
+          // Navigate to welcome page
+          this.router.navigate(['/welcome']);
+        },
+        (error: any) => {
+          console.error('Error deleting user: ', error);
+          // Display alert for failed update
+          this.snackBar.open('Account Obliteration Failed!', '😅', {
             duration: 4000,
           });
         },
