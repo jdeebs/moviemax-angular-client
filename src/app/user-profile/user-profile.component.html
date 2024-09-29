@@ -45,7 +45,7 @@
       <mat-form-field class="edit-profile-card">
         <label>Email</label>
         <input matInput [(ngModel)]="userData.Email" type="email" placeholder="New Email" name="Email" required
-          #email="ngModel" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+          #email="ngModel" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
         <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
           <span *ngIf="email.errors?.['required']">Email is required.</span>
           <span *ngIf="email.errors?.['pattern']">Enter a valid email address.</span>
