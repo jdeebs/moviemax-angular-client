@@ -16,6 +16,9 @@ export class UserProfileComponent implements OnInit {
     Birthday: string;
   } = { Username: '', Password: '', Email: '', Birthday: '' };
 
+  // Store old username separately to use for fetching and updating user info
+  oldUsername: string = '';
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
@@ -25,6 +28,8 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = JSON.parse(localStorage.getItem('user') || '');
     if (storedUser) {
+      // Store old username
+      this.oldUsername = storedUser.Username;
       this.userData = {
         Username: storedUser.Username,
         Password: '', // Clear password field
@@ -37,7 +42,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser(): void {
-    this.fetchApiData.getUserData(this.userData.Username).subscribe(
+    this.fetchApiData.getUserData(this.oldUsername).subscribe(
       (response: any) => {
         // Destructure password from user object to exclude it from response
         const { Password, ...userData } = response;
@@ -53,34 +58,35 @@ export class UserProfileComponent implements OnInit {
     if (
       window.confirm('Are you sure you want to update? This cannot be undone.')
     ) {
-      this.fetchApiData
-        .updateUser(this.userData.Username, this.userData)
-        .subscribe(
-          (response: any) => {
-            // Exclude password from response before saving to local storage
-            const { Password, ...updatedUserData } = response;
+      this.fetchApiData.updateUser(this.oldUsername, this.userData).subscribe(
+        (response: any) => {
+          // Exclude password from response before saving to local storage
+          const { Password, ...updatedUserData } = response;
 
-            // Save the updated user info to local storage
-            localStorage.setItem('user', JSON.stringify(updatedUserData));
-            
-            // Update userData without Password field
-            this.userData = { ...updatedUserData };
+          // Save the updated user info to local storage
+          localStorage.setItem('user', JSON.stringify(updatedUserData));
 
-            // Display alert for successful update
-            this.snackBar.open('Update successful!', 'OK', {
-              duration: 4000,
-            });
-            // Fetch latest user info to reflect changes in the view
-            this.getUser();
-          },
-          (error: any) => {
-            console.error('Error updating user: ', error);
-            // Display alert for failed update
-            this.snackBar.open('Update Failed!', 'OK', {
-              duration: 4000,
-            });
-          },
-        );
+          // Update userData without Password field
+          this.userData = { ...updatedUserData };
+
+          // Update the stored oldUsername to reflect the updated username
+          this.oldUsername = this.userData.Username;
+
+          // Display alert for successful update
+          this.snackBar.open('Update successful!', 'OK', {
+            duration: 4000,
+          });
+          // Fetch latest user info to reflect changes in the view
+          this.getUser();
+        },
+        (error: any) => {
+          console.error('Error updating user: ', error);
+          // Display alert for failed update
+          this.snackBar.open('Update Failed!', 'OK', {
+            duration: 4000,
+          });
+        },
+      );
     }
   }
 }
