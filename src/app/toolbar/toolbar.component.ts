@@ -29,9 +29,4 @@ export class ToolbarComponent implements OnInit {
   openMovies(): void {
     this.router.navigate(['movies']);
   }
-
-  // Ensure home button is not rendered when on the home screen (movies)
-  showHome(): boolean {
-    return this.router.url !== '/movies';
-  }
 }

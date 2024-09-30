@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
+  HttpResponse,
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -48,13 +49,12 @@ export class FetchApiDataService {
     } else {
       // Server-side error (e.g., API returned a failure response)
       console.error(
-        `Backend returned code ${error.status}, body was: ${error.error}`
+        `Backend returned code: ${error.status}, body was: ${JSON.stringify(error.error)}`,
       );
     }
-    // Return an observable that emits an error message
-    // throwError expects a function to return the error
+    // Return an observable with a user-facing error message
     return throwError(
-      () => new Error('Something went wrong; please try again later.')
+      () => new Error('Something went wrong; please try again later.'),
     );
   }
 
@@ -118,7 +118,7 @@ export class FetchApiDataService {
       .post(
         apiUrl + 'users/' + username + '/movies/' + movieId,
         {},
-        { headers: this.setHeaders() }
+        { headers: this.setHeaders() },
       ) // Empty object as body since we don't need to send any data
       .pipe(catchError(this.handleError));
   }
@@ -126,7 +126,7 @@ export class FetchApiDataService {
   // Delete movie from favorites
   public deleteFavoriteMovie(
     username: string,
-    movieId: string
+    movieId: string,
   ): Observable<any> {
     return this.http
       .delete(apiUrl + 'users/' + username + '/movies/' + movieId, {
@@ -145,9 +145,11 @@ export class FetchApiDataService {
   }
 
   // Delete user
-  public deleteUser(username: string): Observable<any> {
+  public deleteUser(username: string) {
     return this.http
-      .delete(apiUrl + 'users/' + username, { headers: this.setHeaders(),
+      .delete<HttpResponse<any>>(`${apiUrl}users/${username}`, {
+        headers: this.setHeaders(),
+        observe: 'response',
       })
       .pipe(catchError(this.handleError));
   }

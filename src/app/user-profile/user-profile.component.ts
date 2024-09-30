@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-profile',
@@ -102,20 +103,26 @@ export class UserProfileComponent implements OnInit {
       )
     ) {
       this.fetchApiData.deleteUser(this.oldUsername).subscribe(
-        (response: any) => {
-          console.log(response);
-          // Display alert for successful account deletion
-          this.snackBar.open('Account Successfully Obliterated.', '💀', {
-            duration: 4000,
-          });
-          // Delete user and token from local storage
-          localStorage.removeItem('user');
-          localStorage.removeItem('token');
-          // Navigate to welcome page
-          this.router.navigate(['/welcome']);
+        (response: HttpResponse<any>) => {
+          if (response.status === 200) {
+            console.log(response);
+            // Display alert for successful account deletion
+            this.snackBar.open('Account Successfully Obliterated.', '💀', {
+              duration: 4000,
+            });
+            // Remove user and token from local storage
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            // Navigate to welcome page
+            this.router.navigate(['/welcome']);
+          } else {
+            // Handle the error case, even if HTTP status is 200
+            console.error("Unexpected response: ", response);
+            this.snackBar.open('Account Obliteration Failed!', '😅', { duration: 4000, })
+          }
         },
         (error: any) => {
-          console.error('Error deleting user: ', error);
+          console.error('HTTP error deleting user: ', error);
           // Display alert for failed update
           this.snackBar.open('Account Obliteration Failed!', '😅', {
             duration: 4000,
