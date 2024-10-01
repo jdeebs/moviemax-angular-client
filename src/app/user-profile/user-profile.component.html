@@ -3,15 +3,15 @@
     User Info
   </h1>
   <div class="user-info-container">
-    <mat-card class="user-info-card">
+    <mat-card class="card">
       <mat-card-title>Username:</mat-card-title>
       <mat-card-content>{{userData.Username}} </mat-card-content>
     </mat-card>
-    <mat-card class="user-info-card">
+    <mat-card class="card">
       <mat-card-title>Email:</mat-card-title>
       <mat-card-content>{{userData.Email}} </mat-card-content>
     </mat-card>
-    <mat-card class="user-info-card">
+    <mat-card class="card">
       <mat-card-title>Birthday:</mat-card-title>
       <mat-card-content>{{userData.Birthday | date:'MM/dd/yyyy'}} </mat-card-content>
     </mat-card>
@@ -22,7 +22,7 @@
   </h1>
   <mat-card-content class="edit-profile-container">
     <form #profileForm="ngForm" (ngSubmit)="updateUser()" novalidate>
-      <mat-form-field class="edit-profile-card">
+      <mat-form-field class="card">
         <label>Username</label>
         <input matInput [(ngModel)]="userData.Username" placeholder="New Username" type="text" name="Username"
           required minlength="3" #username="ngModel">
@@ -32,7 +32,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="edit-profile-card">
+      <mat-form-field class="card">
         <label>Password</label>
         <input matInput [(ngModel)]="userData.Password" #passwordInput="ngModel" type="password"
           placeholder="New Password" name="Password" required minlength="8" #password="ngModel">
@@ -42,7 +42,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="edit-profile-card">
+      <mat-form-field class="card">
         <label>Email</label>
         <input matInput [(ngModel)]="userData.Email" type="email" placeholder="New Email" name="Email" required
           #email="ngModel" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
@@ -52,7 +52,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="edit-profile-card">
+      <mat-form-field class="card">
         <label>Birthday</label>
         <input matInput [(ngModel)]="userData.Birthday" type="date" name="Birthday">
       </mat-form-field>

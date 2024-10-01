@@ -1,40 +1,78 @@
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>Sign Up!</mat-card-title>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>Sign Up!</mat-card-title>
+  </mat-card-header>
 
-    <mat-card-content>
-        <form #signupForm="ngForm">
-            <mat-form-field>
-                <input matInput [(ngModel)]="userData.Username" placeholder="Username" type="text" name="Username" required
-                    #username="ngModel">
-                <mat-error *ngIf="username.invalid && (username.dirty || username.touched)">
-                    Username is required.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput [(ngModel)]="userData.Password" placeholder="Password" type="password" name="Password" required
-                    #password="ngModel">
-                <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
-                    Password is required.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput [(ngModel)]="userData.Email" placeholder="Email" type="email" name="Email" required
-                    #email="ngModel">
-                <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
-                    Valid email is required.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput [(ngModel)]="userData.Birthday" placeholder="Birthday" type="date" name="Birthday"
-                    #birthday="ngModel">
-            </mat-form-field>
-        </form>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button (click)="registerUser()" color="primary" [disabled]="signupForm.invalid">
-            Sign Up
-        </button>
-    </mat-card-actions>
+  <mat-card-content>
+    <form #signupForm="ngForm">
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.Username"
+          placeholder="Username"
+          type="text"
+          name="Username"
+          minlength="5"
+          required
+          #username="ngModel"
+        />
+        <mat-error
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+        >
+          Username is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.Password"
+          placeholder="Password"
+          type="password"
+          name="Password"
+          minlength="8"
+          required
+          #password="ngModel"
+        />
+        <mat-error
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+        >
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.Email"
+          placeholder="Email"
+          type="email"
+          name="Email"
+          required
+          #email="ngModel"
+        />
+        <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+          Valid email is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.Birthday"
+          placeholder="Birthday"
+          type="date"
+          name="Birthday"
+          #birthday="ngModel"
+        />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      (click)="registerUser()"
+      color="primary"
+      [disabled]="signupForm.invalid"
+    >
+      Sign Up
+    </button>
+  </mat-card-actions>
 </mat-card>
