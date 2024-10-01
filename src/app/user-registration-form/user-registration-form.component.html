@@ -23,7 +23,7 @@
             >Username is required.</span
           >
           <span *ngIf="username.errors?.['minlength']"
-            >Username must be at least 5 characters long.</span
+            >Minimum length 5 characters.</span
           >
         </mat-error>
       </mat-form-field>
@@ -45,7 +45,7 @@
             >Password is required.</span
           >
           <span *ngIf="password.errors?.['minlength']"
-            >Password must be at least 8 characters long.</span
+            >Minimum length 8 characters.</span
           >
         </mat-error>
       </mat-form-field>
