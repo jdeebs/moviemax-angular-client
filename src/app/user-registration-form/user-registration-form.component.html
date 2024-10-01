@@ -19,7 +19,12 @@
         <mat-error
           *ngIf="username.invalid && (username.dirty || username.touched)"
         >
-          Username is required.
+          <span *ngIf="username.errors?.['required']"
+            >Username is required.</span
+          >
+          <span *ngIf="username.errors?.['minlength']"
+            >Username must be at least 5 characters long.</span
+          >
         </mat-error>
       </mat-form-field>
       <mat-form-field>
@@ -36,7 +41,12 @@
         <mat-error
           *ngIf="password.invalid && (password.dirty || password.touched)"
         >
-          Password is required.
+          <span *ngIf="password.errors?.['required']"
+            >Password is required.</span
+          >
+          <span *ngIf="password.errors?.['minlength']"
+            >Password must be at least 8 characters long.</span
+          >
         </mat-error>
       </mat-form-field>
       <mat-form-field>
