@@ -48,13 +48,13 @@ To set up the **MovieMax Angular App** on your local machine, follow these steps
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/your-username/moviemax-angular-app.git
+    git clone https://github.com/your-username/moviemax-angular-client.git
     ```
 
 2. **Navigate to the project directory:**
 
     ```sh
-    cd moviemax-angular-app
+    cd moviemax-angular-client
     ```
 
 3. **Install dependencies:**
