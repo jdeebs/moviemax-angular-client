@@ -3,6 +3,8 @@
  *
  * It includes methods for making GET, POST, PUT, and DELETE requests to various API endpoints.
  * Each API call includes the necessary bearer token for authentication in the request headers.
+ *
+ * @service
  */
 
 import { Injectable } from '@angular/core';
@@ -27,13 +29,23 @@ export class FetchApiDataService {
 
   // Helper methods
 
-  // Get token from local storage
+  /**
+   * Retrieves the stored token from local storage.
+   *
+   * @name getToken
+   * @returns {string} The token or an empty string if not found.
+   */
   private getToken(): string {
     const userToken = localStorage.getItem('token');
     return userToken ? userToken : '';
   }
 
-  // Set header to include bearer token for API access
+  /**
+   * Sets the HTTP headers for API requests, including the bearer token.
+   *
+   * @name setHeaders
+   * @returns {HttpHeaders} Headers object with the Authorization token.
+   */
   private setHeaders(): HttpHeaders {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`,
@@ -41,18 +53,23 @@ export class FetchApiDataService {
     return headers;
   }
 
-  // Handles client-side and server-side errors
+  /**
+   * Handles HTTP errors for client and server responses.
+   *
+   * @name handleError
+   * @param {HttpErrorResponse} error - The error response from the HTTP request.
+   * @returns {Observable<never>} Observable that throws a user-friendly error message.
+   */
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
-      // Client-side error (e.g., network issue, browser-related error)
+      // Client-side error
       console.error('An error occurred:', error.error.message);
     } else {
-      // Server-side error (e.g., API returned a failure response)
+      // Server-side error
       console.error(
         `Backend returned code: ${error.status}, body was: ${JSON.stringify(error.error)}`,
       );
     }
-    // Return an observable with a user-facing error message
     return throwError(
       () => new Error('Something went wrong; please try again later.'),
     );
@@ -60,35 +77,64 @@ export class FetchApiDataService {
 
   // API request methods
 
-  // User registration
+  /**
+   * Registers a new user.
+   *
+   * @name userRegistration
+   * @param {object} userData - The data of the user to be registered (username, password, email).
+   * @returns {Observable<any>} An observable with the API response.
+   */
   public userRegistration(userData: any): Observable<any> {
     return this.http
       .post(apiUrl + 'users', userData)
       .pipe(catchError(this.handleError));
   }
 
-  // User login
+  /**
+   * Logs in an existing user.
+   *
+   * @name userLogin
+   * @param {object} userData - The login credentials (username, password).
+   * @returns {Observable<any>} An observable with the API response containing user data and a token.
+   */
   public userLogin(userData: any): Observable<any> {
     return this.http
       .post(apiUrl + 'login', userData)
       .pipe(catchError(this.handleError));
   }
 
-  // Get all movies
+  /**
+   * Fetches all movies.
+   *
+   * @name getAllMovies
+   * @returns {Observable<any>} An observable with the list of movies.
+   */
   public getAllMovies(): Observable<any> {
     return this.http
       .get(apiUrl + 'movies', { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
-  // Get a single movie
+  /**
+   * Fetches a single movie by its title.
+   *
+   * @name getSingleMovie
+   * @param {string} title - The title of the movie to fetch.
+   * @returns {Observable<any>} An observable with the movie details.
+   */
   public getSingleMovie(title: string): Observable<any> {
     return this.http
       .get(apiUrl + 'movies/' + title, { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
-  // Get director
+  /**
+   * Fetches details about a director by name.
+   *
+   * @name getDirector
+   * @param {string} directorName - The name of the director to fetch.
+   * @returns {Observable<any>} An observable with the director's details.
+   */
   public getDirector(directorName: string): Observable<any> {
     return this.http
       .get(apiUrl + 'movies/director/' + directorName, {
@@ -97,22 +143,40 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // Get genre
+  /**
+   * Fetches details about a genre by name.
+   *
+   * @name getGenre
+   * @param {string} genreName - The name of the genre to fetch.
+   * @returns {Observable<any>} An observable with the genre details.
+   */
   public getGenre(genreName: string): Observable<any> {
     return this.http
       .get(apiUrl + 'movies/genre/' + genreName, { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
-  // Get user data
-  // Includes id, username, pass, email, birthday, fav movies
+  /**
+   * Fetches user data, including username, email, and favorite movies.
+   *
+   * @name getUserData
+   * @param {string} username - The username of the user to fetch data for.
+   * @returns {Observable<any>} An observable with the user data.
+   */
   public getUserData(username: string): Observable<any> {
     return this.http
       .get(apiUrl + 'users/' + username, { headers: this.setHeaders() })
       .pipe(catchError(this.handleError));
   }
 
-  // Add movie to favorites
+  /**
+   * Adds a movie to the user's favorites.
+   *
+   * @name addFavoriteMovie
+   * @param {string} username - The username of the user.
+   * @param {string} movieId - The ID of the movie to add.
+   * @returns {Observable<any>} An observable with the API response.
+   */
   public addFavoriteMovie(username: string, movieId: string): Observable<any> {
     return this.http
       .post(
@@ -123,7 +187,14 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // Delete movie from favorites
+  /**
+   * Removes a movie from the user's favorites.
+   *
+   * @name deleteFavoriteMovie
+   * @param {string} username - The username of the user.
+   * @param {string} movieId - The ID of the movie to remove.
+   * @returns {Observable<any>} An observable with the API response.
+   */
   public deleteFavoriteMovie(
     username: string,
     movieId: string,
@@ -135,7 +206,14 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // Update user info
+  /**
+   * Updates the user's information (username, password, email, birthday).
+   *
+   * @name updateUser
+   * @param {string} username - The username of the user to update.
+   * @param {object} userData - The new user data to update.
+   * @returns {Observable<any>} An observable with the API response.
+   */
   public updateUser(username: string, userData: any): Observable<any> {
     return this.http
       .put(apiUrl + 'users/' + username, userData, {
@@ -144,7 +222,13 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // Delete user
+  /**
+   * Deletes a user account.
+   *
+   * @name deleteUser
+   * @param {string} username - The username of the user to delete.
+   * @returns {Observable<HttpResponse<any>>} An observable with the deletion status.
+   */
   public deleteUser(username: string) {
     return this.http
       .delete<HttpResponse<any>>(`${apiUrl}users/${username}`, {
