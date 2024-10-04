@@ -1,0 +1,9 @@
+{
+    "entryPoints": ["src/app/fetch-api-data.service.ts"],
+    "out": "docs",
+    "name": "MovieMax API Documentation",
+    "exclude": ["**/*.spec.ts"], // Exclude tests
+    "includeVersion": true,
+    "theme": "default" // Documentation theme
+  }
+  
