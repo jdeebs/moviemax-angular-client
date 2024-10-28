@@ -1,0 +1,28 @@
+@import "src/styles.scss";
+
+.content-container {
+    padding: $spacing-lg;
+}
+
+.mat-mdc-card-header,
+.movie-info-dialog-title,
+.movie-info-dialog-content,
+.movie-info-dialog-button {
+    padding: 0;
+    margin-bottom: $spacing-sm;
+}
+
+.movie-info-dialog-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 0;
+}
+
+.movie-info-dialog-title {
+    font-size: $font-size-xl;
+}
+
+.movie-info-dialog-content {
+    font-size: 1.3rem;
+}
